@@ -1,4 +1,4 @@
-**#Data Structures Practice**\n
+**#Data Structures Practice**
 This repository contains some of my implementations of important data structures that I have worked on as part of my learning journey in Data Structures and Algorithms (DSA).
 
 **Data Structures Covered**
