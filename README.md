@@ -23,6 +23,7 @@ This repository contains some of my implementations of important data structures
 
 **3. Queues**
 
+~ Queue Using Array
 
 **Usage**
 
