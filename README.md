@@ -9,9 +9,17 @@ This repository contains some of my implementations of important data structures
 
 ~ Singly Linked List
 
-~ Circular Linked List
+~ Doubly Linked List
+
+~ Singly Circular Linked List
+
+~ Doubly Linked List
 
 **2. Stacks**
+
+~ Stacks Using Array
+
+~ Stacks Using Linked List
 
 **3. Queues**
 
