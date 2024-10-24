@@ -1,24 +1,18 @@
+#include "SLL.h"
 #include <iostream>
 #include <vector>
 using namespace std;
 
-class Node {
-    public:
-    int data;
-    Node *next;
-
-    public:
-    Node(int data1, Node *next1) {
+Node::Node(int data1, Node *next1) {
         data = data1;
         next = next1;
-    }
+}
 
-    public:
-    Node(int data1) {
+Node::Node(int data1) {
         data = data1;
         next = nullptr;
-    }
-};
+}
+
 
 Node* convertArr2LL(vector<int> &arr) {
     Node *head= new Node(arr[0]);
@@ -206,10 +200,10 @@ Node* reverseLL(Node* head) {
     return head;
 }
 
-int main()
+/*int main()
 {
     vector<int> arr = {2, 5, 8, 7}; 
     Node *head = convertArr2LL(arr);
     head = insertBeforeValue(head, 9, 2);
     print(head);
-}
+}*/
