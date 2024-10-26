@@ -21,12 +21,18 @@ This repository contains some of my implementations of important data structures
 
 ~ Stacks Using Linked List
 
-Use **g++ SULL.cpp SLL.cpp -o your_program_name** to compile the code.
+~ Stacks Using Queue
+
+Use **g++ SULL.cpp SLL.cpp -o your_program_name** to compile the code for SULL.cpp file.
 
 
 **3. Queues**
 
 ~ Queue Using Array
+
+~ Queue Using Linked List
+
+~ Queue Using Stacks
 
 **Usage**
 
