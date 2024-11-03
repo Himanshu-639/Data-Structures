@@ -38,7 +38,7 @@ Use **g++ SULL.cpp SLL.cpp -o your_program_name** to compile the code for SULL.c
 
 Clone the repository and navigate to the specific folder of the data structure you want to explore.
 
-git clone https://github.com/YourUsername/DataStructures.git
+git clone https://github.com/Himanshu-639/Data-Structures.git
 
 **Development Note**
 
