@@ -51,7 +51,8 @@ string InfixToPrefix(string s) {
             operatorStack.pop();
         }
         else {
-            while (!operatorStack.empty() && priority(s[i]) <= priority(operatorStack.top())) {
+            // Modified "<=" to "<"
+            while (!operatorStack.empty() && priority(s[i]) < priority(operatorStack.top())) {
                 ans += operatorStack.top();
                 operatorStack.pop();
             }
