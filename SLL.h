@@ -16,7 +16,7 @@ public:
 
 Node* convertArr2LL(vector<int> &arr);
 int lengthofLL(Node* head);
-int checkIfPresent(Node* head, int val);
+Node* checkIfPresent(Node* head, int val);
 void print(Node* head);
 Node* removesHead(Node* head);
 Node* removesTail(Node* head);

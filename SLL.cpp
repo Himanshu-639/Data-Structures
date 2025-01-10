@@ -35,13 +35,13 @@ int lengthofLL(Node* head) {
     return cnt;
 }
 
-int checkIfPresent(Node* head, int val) {
+Node* checkIfPresent(Node* head, int val) {
     Node* temp = head;
     while(temp) {
-        if(temp -> data == val) return 1;
+        if(temp -> data == val) return temp;
         temp = temp -> next;
     }
-    return 0;
+    return nullptr;
 }
 
 void print(Node* head) {
@@ -200,10 +200,12 @@ Node* reverseLL(Node* head) {
     return head;
 }
 
-/*int main()
+int main()
 {
     vector<int> arr = {2, 5, 8, 7}; 
     Node *head = convertArr2LL(arr);
     head = insertBeforeValue(head, 9, 2);
     print(head);
-}*/
+    int l = lengthofLL(head);
+    cout << l;
+}
