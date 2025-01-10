@@ -100,7 +100,7 @@ int main() {
     queue.push(20);
     queue.printEl();
     int result1 = queue.frontEl();
-    queue.print(result1);
+    queue.print(result1);    
     queue.clearQueue();
     int result2 = queue.Qsize();
     queue.print(result2);

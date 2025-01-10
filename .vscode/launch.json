@@ -1,6 +1,8 @@
 {
   "version": "0.2.0",
   "configurations": [
+
+    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,9 +11,9 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/HIMANSHU/Desktop/Data Structures",
-      "program": "c:/Users/HIMANSHU/Desktop/Data Structures/build/Debug/outDebug",
+      "program": "c:/Users/HIMANSHU/Desktop/Data Structures/a.exe",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
