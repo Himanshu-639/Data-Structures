@@ -20,110 +20,104 @@ class Node {
     }
 };
 
-pair<Node*, Node*> convertArr2LL(vector<int> & arr) {
-    Node* head = new Node(arr[0]);
-    Node* mover = head;
+Node* convertArr2LL(vector<int> & arr) {
+    Node* ptr = new Node(arr[0]);
+    ptr -> next = ptr;
     for (int i=1; i<arr.size(); i++) {
         Node* temp = new Node(arr[i]);
-        mover -> next = temp;
-        mover = temp;
+        temp -> next = ptr -> next;
+        ptr -> next = temp;
+        ptr = temp;
     }
-    Node* tail = mover;
-    tail -> next = head;
-    return {head, tail};
+    return ptr;
 }
 
-int lengthofLL(Node* head) {
+int lengthofLL(Node* ptr) {
     int cnt = 0;
-    Node* temp = head;
+    Node* temp = ptr -> next;
     do {
         cnt++;
         temp = temp -> next;
-    } while(temp != head);
+    } while(temp != ptr -> next);
     return cnt;
 }
 
-void print(Node* head) {
-    Node* temp = head;
-    if (head == NULL) {
+void print(Node* ptr) {
+    Node* temp = ptr -> next;
+    if (ptr == NULL) {
         cout << "The list is empty.";
     }
     else {
         do {
             cout << temp -> data << " ";
             temp = temp -> next;
-        } while(temp != head);
+        } while(temp != ptr -> next);
         cout<<endl;
     }
 }
 
-Node* insertHead (Node* head, int val, Node*& tail) {
-    Node* temp = new Node(val);
-    if (head == NULL) {
-        temp -> next = temp;
-        head = tail = temp;
+Node* insertAtBeg (Node* ptr, int val) {
+    Node* newNode = new Node(val);
+    if (ptr == NULL) {
+        ptr = newNode;
+        ptr -> next = newNode;
     }
     else {
-        temp -> next = head;
-        tail -> next = temp;
-        head = temp;
+        newNode -> next = ptr -> next;
+        ptr -> next = newNode;
     }
-    return head;
+    return ptr;
 }
 
-Node* insertTail (Node* head, int val, Node*& tail) {
-    Node* temp = new Node(val);
-    if (head == NULL) {
-        temp -> next = temp;
-        head = tail = temp;
+Node* insertAtEnd (Node* ptr, int val) {
+    Node* newNode = new Node(val);
+    if (ptr == NULL) {
+        ptr = newNode;
+        ptr -> next = newNode;
     }
     else {
-        temp -> next = head;
-        tail -> next = temp;
-        tail = temp;
+        newNode -> next = ptr -> next;
+        ptr -> next = newNode;
+        ptr = newNode;
     }
-    return head;
+    return ptr;
 }
 
-Node* insertAtK(Node* head, int el, int k, Node*& tail) {
-    int l = lengthofLL(head);
+Node* insertAtK(Node* ptr, int el, int k) {
+    int l = lengthofLL(ptr);
     if (k < 0 || k > (l + 1)) {
         cout << "Invalid Postion" << endl;
-        return head;
+        return ptr;
     }
     else if (k == 1) {
-        return insertHead(head, el, tail);
+        return insertAtBeg(ptr, el);
     }
     else {
         Node* newNode = new Node(el);
-        Node* temp = head;
+        Node* temp = ptr -> next;
         int i = 1;
         while (i < (k-1)) {
             temp = temp -> next;
             i++;
         }
         newNode -> next = temp -> next;
-        temp -> next = newNode;
-        if (newNode -> next == head) {
-            tail = newNode;
-        }
-        return head;
+        temp -> next = newNode;  
+        return ptr;
     }
 }
 
-Node* insertBeforeEl(Node *head, int el, int val, Node* &tail) {
-    if (head == NULL) {
+Node* insertBeforeEl(Node* ptr, int el, int val) {
+    if (ptr == NULL) {
         return NULL;
     }
-    Node* temp = head;
+    Node* temp = ptr -> next;
     if (temp -> data == el) {
         Node* newNode = new Node(val, temp);
-        tail -> next = newNode;
-        head = newNode;
-        return head;
+        ptr -> next = newNode;
+        return ptr;
     }
     else {
-        while(temp -> next != head) {
+        while(temp -> next != ptr -> next) {
             if (temp -> next -> data == el) {
                 Node* newNode = new Node(val, temp -> next);
                 temp -> next = newNode;
@@ -131,93 +125,83 @@ Node* insertBeforeEl(Node *head, int el, int val, Node* &tail) {
             }
             temp = temp -> next;
         }
-        return head;
+        return ptr;
     }
 }
 
-Node* insertAfterEl(Node* head, int el, int val, Node* &tail) {
-    if (head == NULL) {
+Node* insertAfterEl(Node* ptr, int el, int val) {
+    if (ptr == NULL) {
         return NULL;
     }
-    if (head -> data == el) {
-        Node* newNode = new Node(val, head -> next);
-        head -> next = newNode;
-        if (tail == head) {
-            tail = newNode;
-        }
-        return head;
+    if (ptr -> data = el) {
+        Node* newNode = new Node(val, ptr -> next);
+        ptr -> next = newNode;
+        ptr = newNode;
     }
-    else{
-        Node* temp = head -> next;
-        while (temp != head) {
+    else {
+        Node* temp = ptr -> next;
+        while (temp -> next != ptr -> next) {
             if (temp -> data == el) {
                 Node* newNode = new Node(val, temp -> next);
                 temp -> next = newNode;
-                if (temp == tail) {
-                    tail = newNode;
-                }
                 break;
+                }
+                temp = temp -> next;
             }
-            temp = temp -> next;
-        }
-        return head;
+            return ptr;
     }
 }
 
-Node* removesHead(Node* head, Node* &tail) {
-    Node* temp = head;
-    if (head == NULL) {
+Node* removeFromBeg(Node* ptr) {
+    Node* temp = ptr -> next;
+    if (temp == NULL) {
         return NULL;
     }
-    else if (head -> next == head) {
-        head = NULL;
-        tail = NULL;
+    else if (temp -> next == temp) {
+        ptr = NULL;
         delete temp;
     }
     else {
-        head = head -> next;
-        tail -> next = head;
+        ptr -> next = ptr -> next -> next;
         delete temp;
     }
-    return head;
+    return ptr;
 }
 
-Node* removesTail(Node* head, Node* &tail) {
+Node* removeFromEnd(Node* ptr) {
     Node* current;
-    Node* previous = head;
-    if (head == NULL) {
+    Node* previous = ptr -> next;
+    if (ptr -> next == NULL) {
         return NULL;
     }
-    else if (tail -> next == tail) {
-        head = NULL;
-        tail = NULL;
+    else if (ptr -> next == ptr) {
+        ptr = NULL;
         delete previous;
     }
     else {
-        while (previous -> next -> next != head) {
+        while (previous -> next -> next != ptr -> next) {
             previous = previous -> next;
         }
         current = previous -> next;
-        previous -> next = head;
-        tail = previous;
+        previous -> next = ptr -> next;
         delete current; 
     }
-    return head;
+    return ptr;
 }
 
-Node* removeAtK(Node* head, int k, Node* &tail) {
-    if (head == NULL) {
+Node* removeAtK(Node* ptr, int k) {
+    if (ptr == NULL) {
         return NULL;
     }
     int i = 1;
-    int l = lengthofLL(head);
+    int l = lengthofLL(ptr);
     Node* current;
-    Node* prevnode = head;
+    Node* prevnode = ptr -> next;
     if (k < 1 || k > l) {
         return NULL;
     }
     else if (k == 1) {
-        head = removesHead(head, tail);
+        ptr = removeFromBeg(ptr);
     }
     else {
         while (i < (k - 1)) {
@@ -228,73 +212,72 @@ Node* removeAtK(Node* head, int k, Node* &tail) {
         prevnode -> next = current -> next;
         delete current;
     }
-    return head;
+    return ptr;
 }
 
-Node* removeEl(Node* head, int el, Node* &tail) {
-    int l = lengthofLL(head);
-    if (head == NULL) {
+Node* removeEl(Node* ptr, int el) {
+    if (ptr == NULL) {
         return NULL;
     }
-    int i = 0;
-    Node* temp = head;
-    Node* prevNode;
-    Node* nextNode;
-    if (head -> data == el) {
-        if (head == tail) {
-            head = NULL;
-            tail = NULL;
+    Node* temp = ptr -> next;
+    if (ptr -> next -> data == el) {
+        if (ptr -> next == ptr) {
+            delete ptr;
+            return NULL;
         }
         else {
-            head = head -> next;
-            tail -> next = head;
+            ptr -> next = temp -> next;
             delete temp;
+            return ptr;
         }
     }
-    else {
-        while (i < l) {
-            prevNode = temp;
-            temp = temp -> next;
-            i++;
-            if (temp -> data == el) {
-                prevNode -> next = temp -> next;
-                if (temp == tail) {
-                    tail = prevNode;
-                }
-                delete temp;
-                break;
+    Node* prevNode = temp;
+    temp = temp -> next;
+    while (temp != ptr -> next) {
+        if (temp -> data == el) {
+            prevNode -> next = temp -> next;
+            if (temp == ptr) {
+                ptr = prevNode;
             }
+            delete temp;
+            break;
         }
-    }
-    return head;
+        prevNode = temp;
+        temp = temp -> next;
+        }
+    return ptr;
 }
 
-Node* reverseCLL(Node* head, Node* &tail) {
-    if (head == 0 || head -> next == head) {
-        return head;
+Node* reverseCLL(Node* ptr) {
+    if (ptr == NULL || ptr -> next == ptr) {
+        return ptr;
     }
-    Node* current = head;
+    Node* temp = ptr -> next;
+    Node* current = ptr -> next;
     Node* nextNode = current -> next;
-    Node* prevNode = tail;
+    Node* prevNode = ptr;
     do {
         current -> next = prevNode;
         prevNode = current;
         current = nextNode;
         nextNode = current -> next;
-    } while (current != head);
+    } while (current != ptr -> next);
 
-    tail = head;
-    head = prevNode;
-    return head;
+    ptr = temp;
+    return ptr;
 }
 
 int main()
 {
     vector<int> arr = {2, 4, 7 };
-    pair<Node*, Node*> result = convertArr2LL(arr);
-    Node* head = result.first;
-    Node* tail = result.second;
-    head = removeEl(head, 7, tail);
-    print(head -> next);
-
+    Node* ptr = convertArr2LL(arr);
+    Node* result = removeEl(ptr, 7);
+    if (result == NULL) {
+        cout << "The list is empty. "<<endl;
+    } 
+    else {
+        print(result);
+    }
+    
+    return 0;
 }
