@@ -35,9 +35,10 @@ class Heap {
             heapify(arr, n, i);
         }
 
+        // Extract elements from heap one by one
         for (int i = n - 1; i > 0; i--) {
-            swap(arr[0], arr[i]);
-            heapify(arr, i, 0);
+            swap(arr[0], arr[i]);   // Move current root to end
+            heapify(arr, i, 0);    // Call heapify on reduced heap
         }
     }
 
