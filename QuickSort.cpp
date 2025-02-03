@@ -2,26 +2,48 @@
 #include <vector>
 using namespace std;
 
-int partition(vector<int>& arr, int low, int high) {
-    int pivot = arr[high];
-    int i = low - 1;
-    for (int j = low; j < high; j++) {
-        if (arr[j] <= pivot) {
-            i++;
-            swap(arr[i], arr[j]);
+class QuickSort {
+    public :
+    QuickSort() {
+        count = 0;
+    }
+
+    void quickSort(vector<int>& arr, int low, int high) {
+        if(low < high) {
+            int partIndex = partition(arr, low, high);
+            quickSort(arr, low, partIndex - 1);
+            quickSort(arr, partIndex + 1, high);
         }
     }
-    swap(arr[i + 1], arr[high]);
-    return i+1;
-}
 
-void quickSort(vector<int>& arr, int low, int high) {
-    if(low < high) {
-        int partIndex = partition(arr, low, high);
-        quickSort(arr, low, partIndex - 1);
-        quickSort(arr, partIndex + 1, high);
+    void printArray(vector<int> & arr) {
+        for (int val : arr) {
+            cout << val << " ";
+        }
+        cout << endl;
     }
-}
+
+    void printComparisons() {
+        cout << "Total number of comaparisons : " << count <<endl;
+    }
+
+    private :
+    int count ;
+
+    int partition(vector<int>& arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            count++;
+            if (arr[j] <= pivot) {
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return i+1;
+    }
+};
 
 int main() {
     vector<int> arr;
@@ -36,10 +58,11 @@ int main() {
         arr.push_back(temp);
     }
 
-    quickSort(arr, 0, size - 1);
+    QuickSort q;
+    q.quickSort(arr, 0, size - 1);
 
-    for(int val : arr) {
-        cout << val <<" ";
-    }
-    cout << endl;
+    cout << "Array after Sorting is : ";
+    q.printArray(arr);
+    q.printComparisons();
+    return 0;
 }
